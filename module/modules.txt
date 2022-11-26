@@ -1,0 +1,187 @@
+-- Module-2 Assignment
+-- Problem Statement:
+-- You have successfully cleared the first semester. In your second semester you will learn how to create
+-- tables, work with where clause and basic operators
+-- Tasks to be done:
+-- 1. Create a customer table which comprises of these columns – ‘customer_id’, ‘first_name’,
+-- ‘last_name’, ‘email’, ‘address’, ‘city’,’state’,’zip’
+-- 2. Insert 5 new records into the table
+-- 3. Select only the ‘first_name’ & ‘last_name’ columns from the customer table
+-- 4. Select those records where ‘first_name’ starts with “G” and city is ‘San Jose’
+-- Module-3 Assignment
+-- Problem Statement:
+-- You have successfully cleared the 2nd semester. In your 3rd semester you will work with joins and update
+-- statement
+-- Tasks to be done:
+-- 1. Create an ‘Orders’ table which comprises of these columns – ‘order_id’, ‘order_date’, ‘amount’,
+-- ‘customer_id’
+-- 2. Make an inner join on ‘Customer’ & ‘Order’ tables on the ‘customer_id’ column
+-- 3. Make left and right joins on ‘Customer’ & ‘Order’ tables on the ‘customer_id’ column
+-- 4. Update the ‘Orders’ table, set the amount to be 100 where ‘customer_id’ is 3
+-- Module-4 Assignment
+-- Problem Statement:
+-- You have successfully cleared your 3rd semester. In the 4th semester, you will work with inbuilt functions
+-- and user-defined functions
+-- Tasks to be done:
+-- 1. Use the inbuilt functions and find the minimum, maximum and average amount from the orders
+-- table
+-- 2. Create a user-defined function, which will multiply the given number with 10
+-- 3. Use the case statement to check if 100 is less than 200, greater than 200 or equal to 200 and
+-- print the corresponding value
+-- Module-5 Assignment
+-- Problem Statement:
+-- You have successfully cleared your 4th semester. In the 5th semester you will work with group by, having
+-- by clauses and set operators
+-- Tasks to be done:
+-- 1. Arrange the ‘Orders’ dataset in decreasing order of amount
+-- 2. Create a table with name ‘Employee_details1’ and comprising of these columns – ‘Emp_id’,
+-- ‘Emp_name’, ‘Emp_salary’. Create another table with name ‘Employee_details2’, which
+-- comprises of same columns as first table.
+-- 3. Apply the union operator on these two tables
+-- 4. Apply the intersect operator on these two tables
+-- 5. Apply the except operator on these two tables
+-- create a table customer
+create table customer (
+    customer_id int,
+    first_name varchar(20),
+    last_name varchar(20),
+    email varchar(20),
+    address varchar(20),
+    city varchar(20),
+    state varchar(20),
+    zip int
+);
+-- insert 5 records into customer table
+insert into customer
+values (
+        1,
+        'Gaurav',
+        'Sharma',
+        'gauravsharma@gmail.com',
+        '123, Main Street',
+        'San Jose',
+        'CA',
+        95112
+    );
+insert into customer
+values (
+        2,
+        'Rahul',
+        'Sharma',
+        'rsharma@gmail.com',
+        '12, Summer Street',
+        'Mumbai',
+        'IN',
+        133385
+    );
+insert into customer
+values (
+        3,
+        'Rohit',
+        'Sharma',
+        'rsharma@gmail.com',
+        '33, City Avenue',
+        'Chennai',
+        'IN',
+        106682
+    );
+insert into customer
+values (
+        4,
+        'Vinod',
+        'Sharma',
+        'vsharma@gmail.com',
+        '1, Hauke Street',
+        'Bengaluru',
+        'IN',
+        98193
+    );
+insert into customer
+values (
+        5,
+        'Shrawan',
+        'Sharma',
+        'ssharma@gmail.com',
+        '32, College Road',
+        'Mysore',
+        'CO',
+        85888
+    );
+-- Select only the ‘first_name’ & ‘last_name’ columns from the customer table
+select first_name,
+    last_name
+FROM customer;
+-- Select those records where ‘first_name’ starts with “G” and city is ‘San Jose
+select *
+from customer
+where first_name LIKE '%G%'
+    and city = 'San Jose';
+--  MODULE-3 ASSIGNMENT
+-- Create an ‘Orders’
+CREATE TABLE ORDERS (
+    order_id int PRIMARY KEY,
+    order_date date,
+    amount int,
+    customer_id int
+);
+-- Make an inner join on ‘Customer’ & ‘Order’ tables on the ‘customer_id’ column
+SELECT *
+FROM customer
+    INNER JOIN orders ON customer.customer_id = orders.customer_id;
+-- Make left and right joins on ‘Customer’ & ‘Order’ tables on the ‘customer_id’ column
+SELECT *
+FROM customer
+    LEFT JOIN orders ON customer.customer_id = orders.customer_id;
+-- Update the ‘Orders’ table, set the amount to be 100 where ‘customer_id’ is  3
+UPDATE ORDERS
+SET amount = 100
+WHERE orders.customer_id = 3;
+-- MODULE-4 ASSIGNMENT
+-- 1. Use the inbuilt functions and find the minimum, maximum and average amount from the orders table
+SELECT MIN(amount),
+    MAX(amount),
+    AVG(amount)
+FROM orders;
+-- 2. Create a user-defined function, which will multiply the given number with 10
+CREATE FUNCTION multiply10(value int) RETURN int as BEGIN RETURN value * 10;
+END;
+-- 3. Use the case statement to check if 100 is less than 200, greater than 200 or equal to 200 and print the corresponding value
+SELECT CASE
+        WHEN 100 < 200 THEN '100 is less than 200'
+        WHEN 100 > 200 THEN '100 is greater than 200'
+        ELSE '100 is equal to 200'
+    END;
+-- MODULE-5 ASSIGNMENT
+-- 1. Arrange the ‘Orders’ dataset in decreasing order of amount
+SELECT *
+FROM orders
+ORDER BY amount DESC;
+-- 2. Create a table with name ‘Employee_details1’ and comprising of these columns – ‘Emp_id’, ‘Emp_name’, ‘Emp_salary’. Create another table with name ‘Employee_details2’, which comprises of same columns as first table.
+CREATE TABLE Employee_details1 (
+    Emp_id int,
+    Emp_name varchar(20),
+    Emp_salary int
+);
+CREATE TABLE Employee_details2 (
+    Emp_id int,
+    Emp_name varchar(20),
+    Emp_salary int
+);
+-- 3. Apply the union operator on these two tables
+SELECT *
+FROM Employee_details1
+UNION
+SELECT *
+FROM Employee_details2;
+-- 4. Apply the intersect operator on these two tables
+SELECT *
+FROM Employee_details1
+INTERSECT
+SELECT *
+FROM Employee_details2;
+-- 5. Apply the except operator on these two tables
+SELECT *
+FROM Employee_details1
+EXCEPT
+SELECT *
+FROM Employee_details2;
